@@ -1,0 +1,15 @@
+version: "2.0"
+services:
+  jadeMain:
+    image: jade
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      AGENT_JAR_FILE: "jadeExamples.jar"
+      CONTAINER_NAME: "testContainer"
+      AGENT_NAME: "testAgent"
+      AGENT_CLASS: "example.behaviours.TimeAgent"
+      JADE_PORT: 1100
+    ports:
+      - 1100:1100
