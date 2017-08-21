@@ -1,6 +1,8 @@
+#this docker-compose file is used to test the build of JaDocker. You can use it as template for your services.
+
 version: "2.0"
 services:
-  jadeMain:
+  jadeTimeAgent:
     image: theophile/jadocker
     build:
       context: .
@@ -13,3 +15,20 @@ services:
       JADE_PORT: 1100
     ports:
       - 1100:1100
+  jadeHello:
+      image: theophile/jadocker
+      build:
+        context: .
+        dockerfile: Dockerfile
+      #use every default environment value:
+      ports:
+        - 1099:1099
+  jadeMultipleAgents:
+    image: theophile/jadocker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      AGENT_JAR_FILE: "jadeExamples.jar"
+      CONTAINER_NAME: "ContainerSender"
+      AGENT_TABLE: "a:examples.hello.HelloWorldAgent;b:examples.hello.HelloWorldAgent;c:examples.hello.HelloWorldAgent;d:examples.hello.HelloWorldAgent"

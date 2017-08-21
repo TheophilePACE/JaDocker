@@ -25,8 +25,8 @@ ENV AGENT_CLASS ${AGENT_CLASS:-"examples.hello.HelloWorldAgent"}
 #This is the standard port for Jade. You also need to expose the Jade port.
 ENV JADE_PORT ${JADE_PORT:-1099}
 EXPOSE $JADE_PORT
-RUN echo "Your jar file:" ${AGENT_JAR_FILE} "\nCommand executed: jade.Boot -container-name" ${CONTAINER_NAME} "-local-port" ${JADE_PORT} "-agents" ${AGENT_NAME}":"${AGENT_CLASS}
 
 CMD echo "Your jar file:" ${AGENT_JAR_FILE} && \
-    echo "\nCommand executed: jade.Boot -container-name" ${CONTAINER_NAME} "-local-port" ${JADE_PORT} "-agents" ${AGENT_NAME}":"${AGENT_CLASS} && \
-    java -cp "../jade/lib/jade.jar:${AGENT_JAR_FILE}" jade.Boot -container-name ${CONTAINER_NAME} -local-port ${JADE_PORT} -agents ${AGENT_NAME}:${AGENT_CLASS}
+    AGENTS=${AGENT_TABLE:-$AGENT_NAME\:$AGENT_CLASS} && \
+    echo "\nCommand executed: jade.Boot -container-name" ${CONTAINER_NAME} "-local-port" ${JADE_PORT} "-agents" "$AGENTS"  && \
+    java -cp "../jade/lib/jade.jar:${AGENT_JAR_FILE}" jade.Boot -container-name ${CONTAINER_NAME} -local-port ${JADE_PORT} -agents "$AGENTS"
