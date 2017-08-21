@@ -9,7 +9,7 @@ services:
       AGENT_JAR_FILE: "jadeExamples.jar"
       CONTAINER_NAME: "testContainer"
       AGENT_NAME: "testAgent"
-      AGENT_CLASS: "example.behaviours.TimeAgent"
+      AGENT_CLASS: "examples.behaviours.TimeAgent"
       JADE_PORT: 1100
     ports:
       - 1100:1100
